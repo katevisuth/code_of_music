@@ -1,0 +1,49 @@
+<html>
+<head></head>
+<body>
+	<div id="test"></div>
+</body>
+<script>
+	var data = [];
+	var counter = 0;
+	var div = document.getElementById("test");
+
+	function setup() {
+		getData();
+		playLine(counter);
+	}
+
+	function playLine(counter) {
+		playThisLine(counter, function() {
+			counter++;
+			playLine(counter);
+		});
+	}
+
+	function getData() {
+		data = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+	}
+
+	function playThisLine(linenumber, callback) {
+		// Show text
+		div.innerHTML = "test\n" + data.slice(linenumber, linenumber + 5).join('\n');
+
+		// Text to analyze
+		var text2an = data[linenumber];
+
+		// Analize text and make the sound
+		// var sound = makeSound(text2an);
+
+		// Play the sound
+		// sound.play(); // ?
+		console.log('play sound of ' + text2an);
+
+		// When finished playing, call callback
+		window.setTimeout(callback, 2000);
+	}
+
+	window.onload = function() {
+		setup();
+	};
+</script>
+</html>
